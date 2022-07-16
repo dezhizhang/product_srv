@@ -1,7 +1,10 @@
 package main
 
-import "fmt"
+import (
+	"sales-product-srv/driver"
+)
 
 func main() {
-	fmt.Println("hello")
+	driver.InitDB()
+
 }
