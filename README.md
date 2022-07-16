@@ -1,2 +1,2 @@
-# product_srv
-product_srv
+# 商品微服务服务端
+
