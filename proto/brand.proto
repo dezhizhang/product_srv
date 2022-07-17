@@ -1,0 +1,26 @@
+syntax = "proto3";
+option go_package = "./;proto";
+
+
+service Brand {
+  rpc GetBrandList(BrandRequest) returns(BrandResponseList);
+}
+
+message BrandRequest  {
+  string id = 1;
+  string name = 2;
+  int32  pageIndex = 3;
+  int32  pageSize = 4;
+}
+
+
+message BrandResponse  {
+  string id = 1;
+  string name = 2;
+  string logo = 3;
+}
+
+message BrandResponseList  {
+  int32  total = 1;
+  repeated BrandResponse data = 2;
+}

@@ -1,0 +1,25 @@
+syntax = "proto3";
+option go_package = "./;proto";
+
+
+
+service Banner {
+  rpc GetBannerList(BannerRequest) returns(BannerResponseList);
+}
+
+message BannerRequest  {
+  string id = 1;
+  int32  pageIndex = 2;
+  int32  pageSize = 3;
+}
+
+message BannerResponse{
+  string  image = 1;
+  string  url = 2;
+  int32  index = 3;
+}
+
+message BannerResponseList {
+  int32 total = 1;
+  repeated  BannerResponse data = 2;
+}
