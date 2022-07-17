@@ -1,9 +1,12 @@
 syntax = "proto3";
+import "google/protobuf/empty.proto";
 option go_package = "./;proto";
 
 
 service Brand {
   rpc GetBrandList(BrandRequest) returns(BrandResponseList);
+  rpc CreateBrand(CreateBrandRequest) returns(google.protobuf.Empty);
+  rpc DeleteBrand(DeleteBrandRequest) returns(google.protobuf.Empty);
 }
 
 message BrandRequest  {
@@ -11,6 +14,16 @@ message BrandRequest  {
   string name = 2;
   int32  pageIndex = 3;
   int32  pageSize = 4;
+}
+
+message CreateBrandRequest {
+  string id = 1;
+  string name = 2;
+  string logo = 3;
+}
+
+message DeleteBrandRequest {
+  string id = 1;
 }
 
 
