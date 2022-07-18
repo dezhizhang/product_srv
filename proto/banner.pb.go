@@ -13,6 +13,7 @@ import (
 	status "google.golang.org/grpc/status"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
 	reflect "reflect"
 	sync "sync"
 )
@@ -23,6 +24,124 @@ const (
 	// Verify that runtime/protoimpl is sufficiently up-to-date.
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
+
+type CreateBannerRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Id    string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Image string `protobuf:"bytes,2,opt,name=image,proto3" json:"image,omitempty"`
+	Url   string `protobuf:"bytes,3,opt,name=url,proto3" json:"url,omitempty"`
+	Index int32  `protobuf:"varint,4,opt,name=index,proto3" json:"index,omitempty"`
+}
+
+func (x *CreateBannerRequest) Reset() {
+	*x = CreateBannerRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_banner_proto_msgTypes[0]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CreateBannerRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateBannerRequest) ProtoMessage() {}
+
+func (x *CreateBannerRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_banner_proto_msgTypes[0]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateBannerRequest.ProtoReflect.Descriptor instead.
+func (*CreateBannerRequest) Descriptor() ([]byte, []int) {
+	return file_banner_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *CreateBannerRequest) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *CreateBannerRequest) GetImage() string {
+	if x != nil {
+		return x.Image
+	}
+	return ""
+}
+
+func (x *CreateBannerRequest) GetUrl() string {
+	if x != nil {
+		return x.Url
+	}
+	return ""
+}
+
+func (x *CreateBannerRequest) GetIndex() int32 {
+	if x != nil {
+		return x.Index
+	}
+	return 0
+}
+
+type DeleteBannerRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+}
+
+func (x *DeleteBannerRequest) Reset() {
+	*x = DeleteBannerRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_banner_proto_msgTypes[1]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *DeleteBannerRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteBannerRequest) ProtoMessage() {}
+
+func (x *DeleteBannerRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_banner_proto_msgTypes[1]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteBannerRequest.ProtoReflect.Descriptor instead.
+func (*DeleteBannerRequest) Descriptor() ([]byte, []int) {
+	return file_banner_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *DeleteBannerRequest) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
 
 type BannerRequest struct {
 	state         protoimpl.MessageState
@@ -37,7 +156,7 @@ type BannerRequest struct {
 func (x *BannerRequest) Reset() {
 	*x = BannerRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_banner_proto_msgTypes[0]
+		mi := &file_banner_proto_msgTypes[2]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -50,7 +169,7 @@ func (x *BannerRequest) String() string {
 func (*BannerRequest) ProtoMessage() {}
 
 func (x *BannerRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_banner_proto_msgTypes[0]
+	mi := &file_banner_proto_msgTypes[2]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -63,7 +182,7 @@ func (x *BannerRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BannerRequest.ProtoReflect.Descriptor instead.
 func (*BannerRequest) Descriptor() ([]byte, []int) {
-	return file_banner_proto_rawDescGZIP(), []int{0}
+	return file_banner_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *BannerRequest) GetId() string {
@@ -101,7 +220,7 @@ type BannerResponse struct {
 func (x *BannerResponse) Reset() {
 	*x = BannerResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_banner_proto_msgTypes[1]
+		mi := &file_banner_proto_msgTypes[3]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -114,7 +233,7 @@ func (x *BannerResponse) String() string {
 func (*BannerResponse) ProtoMessage() {}
 
 func (x *BannerResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_banner_proto_msgTypes[1]
+	mi := &file_banner_proto_msgTypes[3]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -127,7 +246,7 @@ func (x *BannerResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BannerResponse.ProtoReflect.Descriptor instead.
 func (*BannerResponse) Descriptor() ([]byte, []int) {
-	return file_banner_proto_rawDescGZIP(), []int{1}
+	return file_banner_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *BannerResponse) GetId() string {
@@ -170,7 +289,7 @@ type BannerResponseList struct {
 func (x *BannerResponseList) Reset() {
 	*x = BannerResponseList{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_banner_proto_msgTypes[2]
+		mi := &file_banner_proto_msgTypes[4]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -183,7 +302,7 @@ func (x *BannerResponseList) String() string {
 func (*BannerResponseList) ProtoMessage() {}
 
 func (x *BannerResponseList) ProtoReflect() protoreflect.Message {
-	mi := &file_banner_proto_msgTypes[2]
+	mi := &file_banner_proto_msgTypes[4]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -196,7 +315,7 @@ func (x *BannerResponseList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BannerResponseList.ProtoReflect.Descriptor instead.
 func (*BannerResponseList) Descriptor() ([]byte, []int) {
-	return file_banner_proto_rawDescGZIP(), []int{2}
+	return file_banner_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *BannerResponseList) GetTotal() int32 {
@@ -216,29 +335,48 @@ func (x *BannerResponseList) GetData() []*BannerResponse {
 var File_banner_proto protoreflect.FileDescriptor
 
 var file_banner_proto_rawDesc = []byte{
-	0x0a, 0x0c, 0x62, 0x61, 0x6e, 0x6e, 0x65, 0x72, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x59,
-	0x0a, 0x0d, 0x42, 0x61, 0x6e, 0x6e, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12,
-	0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x12,
-	0x1c, 0x0a, 0x09, 0x70, 0x61, 0x67, 0x65, 0x49, 0x6e, 0x64, 0x65, 0x78, 0x18, 0x02, 0x20, 0x01,
-	0x28, 0x05, 0x52, 0x09, 0x70, 0x61, 0x67, 0x65, 0x49, 0x6e, 0x64, 0x65, 0x78, 0x12, 0x1a, 0x0a,
-	0x08, 0x70, 0x61, 0x67, 0x65, 0x53, 0x69, 0x7a, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x05, 0x52,
-	0x08, 0x70, 0x61, 0x67, 0x65, 0x53, 0x69, 0x7a, 0x65, 0x22, 0x5e, 0x0a, 0x0e, 0x42, 0x61, 0x6e,
-	0x6e, 0x65, 0x72, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x0e, 0x0a, 0x02, 0x69,
-	0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x12, 0x14, 0x0a, 0x05, 0x69,
-	0x6d, 0x61, 0x67, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x69, 0x6d, 0x61, 0x67,
-	0x65, 0x12, 0x10, 0x0a, 0x03, 0x75, 0x72, 0x6c, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03,
-	0x75, 0x72, 0x6c, 0x12, 0x14, 0x0a, 0x05, 0x69, 0x6e, 0x64, 0x65, 0x78, 0x18, 0x04, 0x20, 0x01,
-	0x28, 0x05, 0x52, 0x05, 0x69, 0x6e, 0x64, 0x65, 0x78, 0x22, 0x4f, 0x0a, 0x12, 0x42, 0x61, 0x6e,
-	0x6e, 0x65, 0x72, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x4c, 0x69, 0x73, 0x74, 0x12,
-	0x14, 0x0a, 0x05, 0x74, 0x6f, 0x74, 0x61, 0x6c, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x05,
-	0x74, 0x6f, 0x74, 0x61, 0x6c, 0x12, 0x23, 0x0a, 0x04, 0x64, 0x61, 0x74, 0x61, 0x18, 0x02, 0x20,
-	0x03, 0x28, 0x0b, 0x32, 0x0f, 0x2e, 0x42, 0x61, 0x6e, 0x6e, 0x65, 0x72, 0x52, 0x65, 0x73, 0x70,
-	0x6f, 0x6e, 0x73, 0x65, 0x52, 0x04, 0x64, 0x61, 0x74, 0x61, 0x32, 0x3e, 0x0a, 0x06, 0x42, 0x61,
-	0x6e, 0x6e, 0x65, 0x72, 0x12, 0x34, 0x0a, 0x0d, 0x47, 0x65, 0x74, 0x42, 0x61, 0x6e, 0x6e, 0x65,
-	0x72, 0x4c, 0x69, 0x73, 0x74, 0x12, 0x0e, 0x2e, 0x42, 0x61, 0x6e, 0x6e, 0x65, 0x72, 0x52, 0x65,
-	0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x13, 0x2e, 0x42, 0x61, 0x6e, 0x6e, 0x65, 0x72, 0x52, 0x65,
-	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x4c, 0x69, 0x73, 0x74, 0x42, 0x0a, 0x5a, 0x08, 0x2e, 0x2f,
-	0x3b, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x0a, 0x0c, 0x62, 0x61, 0x6e, 0x6e, 0x65, 0x72, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x1b,
+	0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f,
+	0x65, 0x6d, 0x70, 0x74, 0x79, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x63, 0x0a, 0x13, 0x43,
+	0x72, 0x65, 0x61, 0x74, 0x65, 0x42, 0x61, 0x6e, 0x6e, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65,
+	0x73, 0x74, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02,
+	0x69, 0x64, 0x12, 0x14, 0x0a, 0x05, 0x69, 0x6d, 0x61, 0x67, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x05, 0x69, 0x6d, 0x61, 0x67, 0x65, 0x12, 0x10, 0x0a, 0x03, 0x75, 0x72, 0x6c, 0x18,
+	0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x75, 0x72, 0x6c, 0x12, 0x14, 0x0a, 0x05, 0x69, 0x6e,
+	0x64, 0x65, 0x78, 0x18, 0x04, 0x20, 0x01, 0x28, 0x05, 0x52, 0x05, 0x69, 0x6e, 0x64, 0x65, 0x78,
+	0x22, 0x25, 0x0a, 0x13, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x42, 0x61, 0x6e, 0x6e, 0x65, 0x72,
+	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x22, 0x59, 0x0a, 0x0d, 0x42, 0x61, 0x6e, 0x6e, 0x65,
+	0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x12, 0x1c, 0x0a, 0x09, 0x70, 0x61, 0x67, 0x65,
+	0x49, 0x6e, 0x64, 0x65, 0x78, 0x18, 0x02, 0x20, 0x01, 0x28, 0x05, 0x52, 0x09, 0x70, 0x61, 0x67,
+	0x65, 0x49, 0x6e, 0x64, 0x65, 0x78, 0x12, 0x1a, 0x0a, 0x08, 0x70, 0x61, 0x67, 0x65, 0x53, 0x69,
+	0x7a, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x05, 0x52, 0x08, 0x70, 0x61, 0x67, 0x65, 0x53, 0x69,
+	0x7a, 0x65, 0x22, 0x5e, 0x0a, 0x0e, 0x42, 0x61, 0x6e, 0x6e, 0x65, 0x72, 0x52, 0x65, 0x73, 0x70,
+	0x6f, 0x6e, 0x73, 0x65, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x02, 0x69, 0x64, 0x12, 0x14, 0x0a, 0x05, 0x69, 0x6d, 0x61, 0x67, 0x65, 0x18, 0x02, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x05, 0x69, 0x6d, 0x61, 0x67, 0x65, 0x12, 0x10, 0x0a, 0x03, 0x75, 0x72,
+	0x6c, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x75, 0x72, 0x6c, 0x12, 0x14, 0x0a, 0x05,
+	0x69, 0x6e, 0x64, 0x65, 0x78, 0x18, 0x04, 0x20, 0x01, 0x28, 0x05, 0x52, 0x05, 0x69, 0x6e, 0x64,
+	0x65, 0x78, 0x22, 0x4f, 0x0a, 0x12, 0x42, 0x61, 0x6e, 0x6e, 0x65, 0x72, 0x52, 0x65, 0x73, 0x70,
+	0x6f, 0x6e, 0x73, 0x65, 0x4c, 0x69, 0x73, 0x74, 0x12, 0x14, 0x0a, 0x05, 0x74, 0x6f, 0x74, 0x61,
+	0x6c, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x05, 0x74, 0x6f, 0x74, 0x61, 0x6c, 0x12, 0x23,
+	0x0a, 0x04, 0x64, 0x61, 0x74, 0x61, 0x18, 0x02, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x0f, 0x2e, 0x42,
+	0x61, 0x6e, 0x6e, 0x65, 0x72, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x52, 0x04, 0x64,
+	0x61, 0x74, 0x61, 0x32, 0xba, 0x01, 0x0a, 0x06, 0x42, 0x61, 0x6e, 0x6e, 0x65, 0x72, 0x12, 0x34,
+	0x0a, 0x0d, 0x47, 0x65, 0x74, 0x42, 0x61, 0x6e, 0x6e, 0x65, 0x72, 0x4c, 0x69, 0x73, 0x74, 0x12,
+	0x0e, 0x2e, 0x42, 0x61, 0x6e, 0x6e, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a,
+	0x13, 0x2e, 0x42, 0x61, 0x6e, 0x6e, 0x65, 0x72, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
+	0x4c, 0x69, 0x73, 0x74, 0x12, 0x3c, 0x0a, 0x0c, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x42, 0x61,
+	0x6e, 0x6e, 0x65, 0x72, 0x12, 0x14, 0x2e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x42, 0x61, 0x6e,
+	0x6e, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x16, 0x2e, 0x67, 0x6f, 0x6f,
+	0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x45, 0x6d, 0x70,
+	0x74, 0x79, 0x12, 0x3c, 0x0a, 0x0c, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x42, 0x61, 0x6e, 0x6e,
+	0x65, 0x72, 0x12, 0x14, 0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x42, 0x61, 0x6e, 0x6e, 0x65,
+	0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x16, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c,
+	0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79,
+	0x42, 0x0a, 0x5a, 0x08, 0x2e, 0x2f, 0x3b, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x06, 0x70, 0x72,
+	0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -253,18 +391,25 @@ func file_banner_proto_rawDescGZIP() []byte {
 	return file_banner_proto_rawDescData
 }
 
-var file_banner_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_banner_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_banner_proto_goTypes = []interface{}{
-	(*BannerRequest)(nil),      // 0: BannerRequest
-	(*BannerResponse)(nil),     // 1: BannerResponse
-	(*BannerResponseList)(nil), // 2: BannerResponseList
+	(*CreateBannerRequest)(nil), // 0: CreateBannerRequest
+	(*DeleteBannerRequest)(nil), // 1: DeleteBannerRequest
+	(*BannerRequest)(nil),       // 2: BannerRequest
+	(*BannerResponse)(nil),      // 3: BannerResponse
+	(*BannerResponseList)(nil),  // 4: BannerResponseList
+	(*emptypb.Empty)(nil),       // 5: google.protobuf.Empty
 }
 var file_banner_proto_depIdxs = []int32{
-	1, // 0: BannerResponseList.data:type_name -> BannerResponse
-	0, // 1: Banner.GetBannerList:input_type -> BannerRequest
-	2, // 2: Banner.GetBannerList:output_type -> BannerResponseList
-	2, // [2:3] is the sub-list for method output_type
-	1, // [1:2] is the sub-list for method input_type
+	3, // 0: BannerResponseList.data:type_name -> BannerResponse
+	2, // 1: Banner.GetBannerList:input_type -> BannerRequest
+	0, // 2: Banner.CreateBanner:input_type -> CreateBannerRequest
+	1, // 3: Banner.DeleteBanner:input_type -> DeleteBannerRequest
+	4, // 4: Banner.GetBannerList:output_type -> BannerResponseList
+	5, // 5: Banner.CreateBanner:output_type -> google.protobuf.Empty
+	5, // 6: Banner.DeleteBanner:output_type -> google.protobuf.Empty
+	4, // [4:7] is the sub-list for method output_type
+	1, // [1:4] is the sub-list for method input_type
 	1, // [1:1] is the sub-list for extension type_name
 	1, // [1:1] is the sub-list for extension extendee
 	0, // [0:1] is the sub-list for field type_name
@@ -277,7 +422,7 @@ func file_banner_proto_init() {
 	}
 	if !protoimpl.UnsafeEnabled {
 		file_banner_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*BannerRequest); i {
+			switch v := v.(*CreateBannerRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -289,7 +434,7 @@ func file_banner_proto_init() {
 			}
 		}
 		file_banner_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*BannerResponse); i {
+			switch v := v.(*DeleteBannerRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -301,6 +446,30 @@ func file_banner_proto_init() {
 			}
 		}
 		file_banner_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*BannerRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_banner_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*BannerResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_banner_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*BannerResponseList); i {
 			case 0:
 				return &v.state
@@ -319,7 +488,7 @@ func file_banner_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_banner_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   3,
+			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
@@ -346,6 +515,8 @@ const _ = grpc.SupportPackageIsVersion6
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type BannerClient interface {
 	GetBannerList(ctx context.Context, in *BannerRequest, opts ...grpc.CallOption) (*BannerResponseList, error)
+	CreateBanner(ctx context.Context, in *CreateBannerRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	DeleteBanner(ctx context.Context, in *DeleteBannerRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type bannerClient struct {
@@ -365,9 +536,29 @@ func (c *bannerClient) GetBannerList(ctx context.Context, in *BannerRequest, opt
 	return out, nil
 }
 
+func (c *bannerClient) CreateBanner(ctx context.Context, in *CreateBannerRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, "/Banner/CreateBanner", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bannerClient) DeleteBanner(ctx context.Context, in *DeleteBannerRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, "/Banner/DeleteBanner", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BannerServer is the server API for Banner service.
 type BannerServer interface {
 	GetBannerList(context.Context, *BannerRequest) (*BannerResponseList, error)
+	CreateBanner(context.Context, *CreateBannerRequest) (*emptypb.Empty, error)
+	DeleteBanner(context.Context, *DeleteBannerRequest) (*emptypb.Empty, error)
 }
 
 // UnimplementedBannerServer can be embedded to have forward compatible implementations.
@@ -376,6 +567,12 @@ type UnimplementedBannerServer struct {
 
 func (*UnimplementedBannerServer) GetBannerList(context.Context, *BannerRequest) (*BannerResponseList, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetBannerList not implemented")
+}
+func (*UnimplementedBannerServer) CreateBanner(context.Context, *CreateBannerRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateBanner not implemented")
+}
+func (*UnimplementedBannerServer) DeleteBanner(context.Context, *DeleteBannerRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteBanner not implemented")
 }
 
 func RegisterBannerServer(s *grpc.Server, srv BannerServer) {
@@ -400,6 +597,42 @@ func _Banner_GetBannerList_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Banner_CreateBanner_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateBannerRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BannerServer).CreateBanner(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/Banner/CreateBanner",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BannerServer).CreateBanner(ctx, req.(*CreateBannerRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Banner_DeleteBanner_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteBannerRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BannerServer).DeleteBanner(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/Banner/DeleteBanner",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BannerServer).DeleteBanner(ctx, req.(*DeleteBannerRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _Banner_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "Banner",
 	HandlerType: (*BannerServer)(nil),
@@ -407,6 +640,14 @@ var _Banner_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetBannerList",
 			Handler:    _Banner_GetBannerList_Handler,
+		},
+		{
+			MethodName: "CreateBanner",
+			Handler:    _Banner_CreateBanner_Handler,
+		},
+		{
+			MethodName: "DeleteBanner",
+			Handler:    _Banner_DeleteBanner_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

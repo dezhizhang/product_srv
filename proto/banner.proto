@@ -1,10 +1,26 @@
 syntax = "proto3";
+import "google/protobuf/empty.proto";
 option go_package = "./;proto";
 
 
 
 service Banner {
+
   rpc GetBannerList(BannerRequest) returns(BannerResponseList);
+  rpc CreateBanner(CreateBannerRequest) returns(google.protobuf.Empty);
+  rpc DeleteBanner(DeleteBannerRequest) returns(google.protobuf.Empty);
+
+}
+
+message CreateBannerRequest {
+  string id = 1;
+  string image = 2;
+  string url = 3;
+  int32 index = 4;
+}
+
+message DeleteBannerRequest {
+  string id = 1;
 }
 
 message BannerRequest  {
