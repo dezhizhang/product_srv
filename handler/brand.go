@@ -65,7 +65,7 @@ func (b *BrandServer) CreateBrand(ctx context.Context, req *proto.CreateBrandReq
 
 // 删除品牌
 
-func (c *BrandServer) DeleteBrand(ctx context.Context, req *proto.DeleteBrandRequest) (*empty.Empty, error) {
+func (b *BrandServer) DeleteBrand(ctx context.Context, req *proto.DeleteBrandRequest) (*empty.Empty, error) {
 	var brand model.Brand
 	if result := driver.DB.Where("id = ?", req.Id).Delete(&brand); result.RowsAffected == 0 {
 		return nil, status.Errorf(codes.Internal, "删除失败")

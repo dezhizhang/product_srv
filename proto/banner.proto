@@ -14,9 +14,10 @@ message BannerRequest  {
 }
 
 message BannerResponse{
-  string  image = 1;
-  string  url = 2;
-  int32  index = 3;
+  string  id = 1;
+  string  image = 2;
+  string  url = 3;
+  int32  index = 4;
 }
 
 message BannerResponseList {
