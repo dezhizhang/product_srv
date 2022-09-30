@@ -73,3 +73,12 @@ func (b *BrandServer) DeleteBrand(ctx context.Context, req *proto.DeleteBrandReq
 	}
 	return &empty.Empty{}, nil
 }
+
+//func (b *BrandServer) UpdateBrand(ctx context.Context, req *proto.UpdateBrandRequest)(*empty.Empty, error) {
+//	var brand model.Brand
+//	result := driver.DB.Where("id = ?",req.id).Find(&brand)
+//	if result.RowsAffected == 0 {
+//		return nil, status.Errorf(codes.Internal, "更新的品牌不存在")
+//	}
+//	if req.Nmae
+//}

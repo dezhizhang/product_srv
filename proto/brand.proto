@@ -7,6 +7,7 @@ service Brand {
   rpc GetBrandList(BrandRequest) returns(BrandResponseList);
   rpc CreateBrand(CreateBrandRequest) returns(google.protobuf.Empty);
   rpc DeleteBrand(DeleteBrandRequest) returns(google.protobuf.Empty);
+  rpc UpdateBrand(UpdateBrandRequest) returns(google.protobuf.Empty);
 }
 
 message BrandRequest  {
@@ -14,6 +15,12 @@ message BrandRequest  {
   string name = 2;
   int32  pageIndex = 3;
   int32  pageSize = 4;
+}
+
+message UpdateBrandRequest{
+  string id = 1;
+  string name = 2;
+  string logo = 3;
 }
 
 message CreateBrandRequest {
