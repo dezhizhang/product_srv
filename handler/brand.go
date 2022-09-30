@@ -49,7 +49,7 @@ func (b *BrandServer) GetBrandList(ctx context.Context, req *proto.BrandRequest)
 
 func (b *BrandServer) CreateBrand(ctx context.Context, req *proto.CreateBrandRequest) (*empty.Empty, error) {
 	var brand model.Brand
-	if result := driver.DB.Where("name=?", req.Name).Find(brand); result.RowsAffected == 1 {
+	if result := driver.DB.Where("name=?", req.Name).Find(&brand); result.RowsAffected == 1 {
 		return nil, status.Errorf(codes.InvalidArgument, "品牌已存在")
 	}
 	brand.Id = req.Id
@@ -67,7 +67,8 @@ func (b *BrandServer) CreateBrand(ctx context.Context, req *proto.CreateBrandReq
 
 func (b *BrandServer) DeleteBrand(ctx context.Context, req *proto.DeleteBrandRequest) (*empty.Empty, error) {
 	var brand model.Brand
-	if result := driver.DB.Where("id = ?", req.Id).Delete(&brand); result.RowsAffected == 0 {
+	result := driver.DB.Where("id =? ", req.Id).Delete(&brand)
+	if result.RowsAffected == 0 {
 		return nil, status.Errorf(codes.Internal, "删除失败")
 	}
 	return &empty.Empty{}, nil
