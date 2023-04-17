@@ -23,7 +23,7 @@ func InitDB() (err error) {
 func init() {
 	InitDB()
 
-	err := DB.AutoMigrate(model.Banner{}, model.Brand{}, model.Category{}, model.Product{})
+	err := DB.AutoMigrate(model.Banner{}, model.Brands{}, model.Category{}, model.GoodsCategoryBrand{}, model.Product{})
 	if err != nil {
 		fmt.Printf("初始化表失败%s", err.Error())
 	}

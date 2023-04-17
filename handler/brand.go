@@ -19,7 +19,7 @@ type BrandServer struct {
 
 func (b *BrandServer) GetBrandList(ctx context.Context, req *proto.BrandRequest) (*proto.BrandResponseList, error) {
 	var count int64
-	var brands []model.Brand
+	var brands []model.Brands
 	var brandsList []*proto.BrandResponse
 	result := driver.DB.Find(&brands)
 	if result.Error != nil {
@@ -31,7 +31,7 @@ func (b *BrandServer) GetBrandList(ctx context.Context, req *proto.BrandRequest)
 	//分页
 	driver.DB.Scopes(utils.Paginate(int(req.PageIndex), int(req.PageSize))).Find(&brands)
 	//查询所有总数
-	driver.DB.Model(&model.Brand{}).Count(&count)
+	driver.DB.Model(&model.Brands{}).Count(&count)
 
 	for _, value := range brands {
 		brandsList = append(brandsList, &proto.BrandResponse{
@@ -48,7 +48,7 @@ func (b *BrandServer) GetBrandList(ctx context.Context, req *proto.BrandRequest)
 // 创建品牌
 
 func (b *BrandServer) CreateBrand(ctx context.Context, req *proto.CreateBrandRequest) (*empty.Empty, error) {
-	var brand model.Brand
+	var brand model.Brands
 	if result := driver.DB.Where("name=?", req.Name).Find(&brand); result.RowsAffected == 1 {
 		return nil, status.Errorf(codes.InvalidArgument, "品牌已存在")
 	}
@@ -66,7 +66,7 @@ func (b *BrandServer) CreateBrand(ctx context.Context, req *proto.CreateBrandReq
 // 删除品牌
 
 func (b *BrandServer) DeleteBrand(ctx context.Context, req *proto.DeleteBrandRequest) (*empty.Empty, error) {
-	var brand model.Brand
+	var brand model.Brands
 	result := driver.DB.Where("id =? ", req.Id).Delete(&brand)
 	if result.RowsAffected == 0 {
 		return nil, status.Errorf(codes.Internal, "删除失败")
@@ -75,7 +75,7 @@ func (b *BrandServer) DeleteBrand(ctx context.Context, req *proto.DeleteBrandReq
 }
 
 func (b *BrandServer) UpdateBrand(ctx context.Context, req *proto.UpdateBrandRequest) (*empty.Empty, error) {
-	var brand model.Brand
+	var brand model.Brands
 	result := driver.DB.Where("id = ?", req.Id).Find(&brand)
 	if result.RowsAffected == 0 {
 		return nil, status.Errorf(codes.Internal, "更新的品牌不存在")

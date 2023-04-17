@@ -28,7 +28,7 @@ func (b *BannerServer) GetBannerList(ctx context.Context, req *proto.BannerReque
 	// 分页
 	driver.DB.Scopes(utils.Paginate(int(req.PageIndex), int(req.PageSize))).Find(&banners)
 	//查询所有总数
-	driver.DB.Model(&model.Brand{}).Count(&count)
+	driver.DB.Model(&model.Brands{}).Count(&count)
 	for _, value := range banners {
 		bannerList = append(bannerList, &proto.BannerResponse{
 			Id:    value.Id,
