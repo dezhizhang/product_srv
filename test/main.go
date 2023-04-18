@@ -16,25 +16,27 @@ func main() {
 	}
 	brandSrvClient := proto.NewBrandClient(conn)
 	//for i := 0; i < 1000; i++ {
-	//	rsp, err := brandSrvClient.CreateBrand(context.Background(), &proto.CreateBrandRequest{
-	//		Id:   fmt.Sprintf("change%d", i),
-	//		Name: fmt.Sprintf("小米%d", i),
-	//		Logo: fmt.Sprintf("https://www.baidu.com"),
-	//	})
-	//	if err != nil {
-	//		fmt.Println(err.Error())
-	//	}
+	//
 	//	fmt.Println(rsp)
 	//}
-	rsp, err := brandSrvClient.GetBrandList(context.Background(), &proto.BrandRequest{
-		PageIndex: 1,
-		PageSize:  10,
+	rsp, err := brandSrvClient.CreateBrand(context.Background(), &proto.CreateBrandRequest{
+		Id:   fmt.Sprintf("change%d", 1),
+		Name: fmt.Sprintf("小米%d", "2"),
+		Logo: fmt.Sprintf("https://www.baidu.com"),
 	})
-
 	if err != nil {
-		fmt.Printf("查询失败%s", err.Error())
-		return
+		fmt.Println(err.Error())
 	}
 	fmt.Println(rsp)
+	//rsp, err := brandSrvClient.GetBrandList(context.Background(), &proto.BrandRequest{
+	//	PageIndex: 1,
+	//	PageSize:  10,
+	//})
+	//
+	//if err != nil {
+	//	fmt.Printf("查询失败%s", err.Error())
+	//	return
+	//}
+	//fmt.Println(rsp)
 
 }

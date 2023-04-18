@@ -2,6 +2,7 @@ package handler
 
 import (
 	"context"
+	"fmt"
 	"github.com/golang/protobuf/ptypes/empty"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
@@ -52,13 +53,14 @@ func (b *BrandServer) CreateBrand(ctx context.Context, req *proto.CreateBrandReq
 	if result := driver.DB.Where("name=?", req.Name).Find(&brand); result.RowsAffected == 1 {
 		return nil, status.Errorf(codes.InvalidArgument, "品牌已存在")
 	}
+	fmt.Println(brand)
 	brand.Id = req.Id
 	brand.Name = req.Name
 	brand.Logo = req.Logo
 	brand.DeletedAt = time.Now()
 	err := driver.DB.Save(&brand).Error
 	if err != nil {
-		return nil, status.Errorf(codes.Internal, "创建品牌失败")
+		return nil, status.Errorf(codes.Internal, err.Error())
 	}
 	return &empty.Empty{}, nil
 }
