@@ -5,6 +5,7 @@ import (
 	"github.com/golang/protobuf/ptypes/empty"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
+	"log"
 	"sales-product-srv/driver"
 	"sales-product-srv/model"
 	"sales-product-srv/proto"
@@ -13,6 +14,30 @@ import (
 
 type BannerServer struct {
 }
+
+// 获取轮播图
+
+func (b *BannerServer) CreateBanner(ctx context.Context, req *proto.CreateBannerRequest) (*empty.Empty, error) {
+	var banner model.Banner
+	var err error
+
+	id, err1 := utils.SnowflakeId()
+	if err1 != nil {
+		log.Printf("创建轮播图%s", err.Error())
+		return nil, err
+	}
+	banner.Id = id
+	banner.Image = req.Image
+	banner.Url = req.Url
+	banner.Index = req.Index
+	err = driver.DB.Save(&banner).Error
+	if err != nil {
+		return nil, status.Errorf(codes.Internal, err.Error())
+	}
+	return &empty.Empty{}, nil
+}
+
+// 获取轮播图列表
 
 func (b *BannerServer) GetBannerList(ctx context.Context, req *proto.BannerRequest) (*proto.BannerResponseList, error) {
 	var count int64

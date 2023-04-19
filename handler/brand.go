@@ -2,10 +2,10 @@ package handler
 
 import (
 	"context"
-	"fmt"
 	"github.com/golang/protobuf/ptypes/empty"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
+	"log"
 	"sales-product-srv/driver"
 	"sales-product-srv/model"
 	"sales-product-srv/proto"
@@ -50,15 +50,20 @@ func (b *BrandServer) GetBrandList(ctx context.Context, req *proto.BrandRequest)
 
 func (b *BrandServer) CreateBrand(ctx context.Context, req *proto.CreateBrandRequest) (*empty.Empty, error) {
 	var brand model.Brands
+	var err error
 	if result := driver.DB.Where("name=?", req.Name).Find(&brand); result.RowsAffected == 1 {
 		return nil, status.Errorf(codes.InvalidArgument, "品牌已存在")
 	}
-	fmt.Println(brand)
-	brand.Id = req.Id
+	id, err1 := utils.SnowflakeId()
+	if err1 != nil {
+		log.Printf("创建品牌%s", err.Error())
+		return nil, err
+	}
+	brand.Id = id
 	brand.Name = req.Name
 	brand.Logo = req.Logo
 	brand.DeletedAt = time.Now()
-	err := driver.DB.Save(&brand).Error
+	err = driver.DB.Save(&brand).Error
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, err.Error())
 	}
