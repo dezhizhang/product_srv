@@ -83,3 +83,25 @@ func (b *BannerServer) DeleteBanner(ctx context.Context, req *proto.DeleteBanner
 	}
 	return &empty.Empty{}, nil
 }
+
+// 更新轮播图
+
+func (b *BannerServer) UpdateBanner(ctx context.Context, req *proto.UpdateBannerRequest) (*empty.Empty, error) {
+	var banner model.Banner
+	result := driver.DB.Where("id = ?", req.Id).Find(&banner)
+	if result.RowsAffected == 0 {
+		return nil, status.Errorf(codes.Internal, "更新的轮播图不存在")
+	}
+	banner.Id = req.Id
+	banner.Url = req.Url
+	banner.Image = req.Image
+	banner.Index = req.Index
+	banner.UpdatedAt = time.Now()
+
+	err := driver.DB.Save(&banner).Error
+	if err != nil {
+		return nil, status.Errorf(codes.Internal, "更新轮播图失败")
+	}
+	return &empty.Empty{}, nil
+
+}
