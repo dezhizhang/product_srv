@@ -10,6 +10,7 @@ import (
 	"sales-product-srv/model"
 	"sales-product-srv/proto"
 	"sales-product-srv/utils"
+	"time"
 )
 
 type BannerServer struct {
@@ -30,6 +31,8 @@ func (b *BannerServer) CreateBanner(ctx context.Context, req *proto.CreateBanner
 	banner.Image = req.Image
 	banner.Url = req.Url
 	banner.Index = req.Index
+	banner.CreatedAt = time.Now()
+	banner.DeletedAt = time.Now()
 	err = driver.DB.Save(&banner).Error
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, err.Error())
