@@ -13,7 +13,8 @@ import (
 
 func main() {
 	server := grpc.NewServer()
-	proto.RegisterBannerServer(server, &handler.BannerServer{})
+	proto.RegisterCategoryServer(server, &handler.CategoryServer{})
+	//proto.RegisterBannerServer(server, &handler.BannerServer{})
 	proto.RegisterBrandServer(server, &handler.BrandServer{})
 	listen, err := net.Listen("tcp", "127.0.0.1:8086")
 	if err != nil {
