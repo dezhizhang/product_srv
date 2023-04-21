@@ -2,6 +2,7 @@ package handler
 
 import (
 	"context"
+	"github.com/golang/protobuf/ptypes/empty"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 	"sales-product-srv/driver"
@@ -46,6 +47,8 @@ func ModelToResponse(product model.Product) proto.ProductInfoResponse {
 		},
 	}
 }
+
+// 获取商品列表
 
 func (p *ProductServer) ProductList(ctx context.Context, req *proto.ProductFilterRequest) (*proto.ProductListResponse, error) {
 	var product []model.Product
@@ -93,3 +96,14 @@ func (p *ProductServer) GetProductDetail(ctx context.Context, req *proto.Product
 	productInfoResponse := ModelToResponse(product)
 	return &productInfoResponse, nil
 }
+
+// 删除商品
+
+func (p *ProductServer) DeleteProduct(ctx context.Context, req *proto.DeleteProductInfo) (*empty.Empty, error) {
+	return nil, nil
+}
+
+// 更新商品
+//func CreateProduct()  {
+//
+//}
