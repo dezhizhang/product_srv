@@ -1,13 +1,5 @@
 package model
 
-type GoodsCategoryBrand struct {
-	BaseModel
-	CategoryId string `gorm:"type:int;index:idx_category_brand,unique" json:"categoryId"`
-	Category   Category
-	BrandsId   string `gorm:"type:int;index:idx_category_brand,unique" json:"brandsId"`
-	Brands     Brands
-}
-
 type Product struct {
 	BaseModel
 	Category
