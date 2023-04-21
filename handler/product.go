@@ -72,7 +72,7 @@ func (p *ProductServer) ProductList(ctx context.Context, req *proto.ProductFilte
 func (p *ProductServer) BatchGetProduct(ctx context.Context, req *proto.BatchProductIdInfo) (*proto.ProductListResponse, error) {
 	var products []model.Product
 	productListResponse := proto.ProductListResponse{}
-	result := driver.DB.Where(&products, req.Id)
+	result := driver.DB.Where(req.Id).Find(&products)
 
 	for _, product := range products {
 		productInfoResponse := ModelToResponse(product)
