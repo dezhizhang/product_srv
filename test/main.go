@@ -1,60 +1,51 @@
-package main
+package test
 
-import (
-	"context"
-	"fmt"
-	"github.com/golang/protobuf/ptypes/empty"
-	"google.golang.org/grpc"
-	"log"
-	"sales-product-srv/proto"
-)
-
-func main() {
-	var err error
-	conn, err := grpc.Dial("127.0.0.1:8086", grpc.WithInsecure())
-	if err != nil {
-		log.Printf("连接失败%s", err.Error())
-		return
-	}
-
-	client := proto.NewCategoryClient(conn)
-	list, err := client.GetAllCategoryList(context.Background(), &empty.Empty{})
-	if err != nil {
-		log.Printf(err.Error())
-	}
-
-	fmt.Println(list)
-
-	//client := proto.NewBannerClient(conn)
-	//id, _ := utils.SnowflakeId()
-	//rsp, err := client.CreateBanner(context.Background(), &proto.CreateBannerRequest{
-	//	Index: int32(1),
-	//	Image: fmt.Sprintf("https://www.baidu.com"),
-	//	Id:    id,
-	//	Url:   fmt.Sprintf("https://www.baidu.com"),
-	//})
-	//
-	//if err != nil {
-	//	log.Printf("创建失败%s", err.Error())
-	//}
-	//fmt.Printf("创建成功%s", rsp)
-	//for i := 0; i < 10; i++ {
-	//	id, _ := utils.SnowflakeId()
-	//	rsp, err := client.CreateBanner(context.Background(), &proto.CreateBannerRequest{
-	//		Index: int32(i),
-	//		Image: fmt.Sprintf("https://www.baidu.com"),
-	//		Id:    id,
-	//		Url:   fmt.Sprintf("https://www.baidu.com"),
-	//	})
-	//
-	//	if err != nil {
-	//		log.Printf("创建失败%s", err.Error())
-	//	}
-	//	fmt.Printf("创建成功%s", rsp)
-	//
-	//}
-
-}
+//func main() {
+//	var err error
+//	conn, err := grpc.Dial("127.0.0.1:8086", grpc.WithInsecure())
+//	if err != nil {
+//		log.Printf("连接失败%s", err.Error())
+//		return
+//	}
+//
+//	client := proto.NewCategoryClient(conn)
+//	list, err := client.GetAllCategoryList(context.Background(), &empty.Empty{})
+//	if err != nil {
+//		log.Printf(err.Error())
+//	}
+//
+//	fmt.Println(list)
+//
+//	//client := proto.NewBannerClient(conn)
+//	//id, _ := utils.SnowflakeId()
+//	//rsp, err := client.CreateBanner(context.Background(), &proto.CreateBannerRequest{
+//	//	Index: int32(1),
+//	//	Image: fmt.Sprintf("https://www.baidu.com"),
+//	//	Id:    id,
+//	//	Url:   fmt.Sprintf("https://www.baidu.com"),
+//	//})
+//	//
+//	//if err != nil {
+//	//	log.Printf("创建失败%s", err.Error())
+//	//}
+//	//fmt.Printf("创建成功%s", rsp)
+//	//for i := 0; i < 10; i++ {
+//	//	id, _ := utils.SnowflakeId()
+//	//	rsp, err := client.CreateBanner(context.Background(), &proto.CreateBannerRequest{
+//	//		Index: int32(i),
+//	//		Image: fmt.Sprintf("https://www.baidu.com"),
+//	//		Id:    id,
+//	//		Url:   fmt.Sprintf("https://www.baidu.com"),
+//	//	})
+//	//
+//	//	if err != nil {
+//	//		log.Printf("创建失败%s", err.Error())
+//	//	}
+//	//	fmt.Printf("创建成功%s", rsp)
+//	//
+//	//}
+//
+//}
 
 // 调用微服务
 //func main() {
