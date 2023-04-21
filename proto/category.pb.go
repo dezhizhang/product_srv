@@ -639,15 +639,7 @@ func (x *CategoryBrandRequest) GetBrandId() int32 {
 	return 0
 }
 
-type CategoryBrandResponse struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
 
-	Id       int32                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Brand    *BrandInfoResponse    `protobuf:"bytes,2,opt,name=brand,proto3" json:"brand,omitempty"`
-	Category *CategoryInfoResponse `protobuf:"bytes,3,opt,name=category,proto3" json:"category,omitempty"`
-}
 
 func (x *CategoryBrandResponse) Reset() {
 	*x = CategoryBrandResponse{}
