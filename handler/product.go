@@ -2,6 +2,8 @@ package handler
 
 import (
 	"context"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
 	"sales-product-srv/driver"
 	"sales-product-srv/model"
 	"sales-product-srv/proto"
@@ -65,6 +67,8 @@ func (p *ProductServer) ProductList(ctx context.Context, req *proto.ProductFilte
 
 }
 
+// 批量获取商品
+
 func (p *ProductServer) BatchGetProduct(ctx context.Context, req *proto.BatchProductIdInfo) (*proto.ProductListResponse, error) {
 	var products []model.Product
 	productListResponse := proto.ProductListResponse{}
@@ -76,4 +80,16 @@ func (p *ProductServer) BatchGetProduct(ctx context.Context, req *proto.BatchPro
 	}
 	productListResponse.Total = int32(result.RowsAffected)
 	return &productListResponse, nil
+}
+
+// 获取商品详情
+
+func (p *ProductServer) GetProductDetail(ctx context.Context, req *proto.ProductInfoRequest) (*proto.ProductInfoResponse, error) {
+	var product model.Product
+	result := driver.DB.First(&product, req.Id)
+	if result.RowsAffected == 0 {
+		return nil, status.Errorf(codes.NotFound, "商品不存在")
+	}
+	productInfoResponse := ModelToResponse(product)
+	return &productInfoResponse, nil
 }
