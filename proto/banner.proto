@@ -25,8 +25,6 @@ message UpdateBannerRequest{
   int32 index = 4;
 }
 
-
-
 message DeleteBannerRequest {
   string id = 1;
 }
