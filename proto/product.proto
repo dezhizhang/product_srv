@@ -6,11 +6,11 @@ service Product{
   //商品接口
   rpc ProductList(ProductFilterRequest) returns(ProductListResponse);
   //现在用户提交订单有多个商品，你得批量查询商品的信息吧
-  rpc BatchGetProduct(BatchProductIdInfo) returns(ProductListResponse); //批量获取商品信息
-  rpc CreateProduct(CreateProductInfo) returns (ProductInfoResponse);
-  rpc DeleteProduct(DeleteProductInfo) returns (google.protobuf.Empty);
-  rpc UpdateProduct(CreateProductInfo) returns (google.protobuf.Empty);
-  rpc GetProductDetail(ProductInfoRequest) returns(ProductInfoResponse);
+//  rpc BatchGetProduct(BatchProductIdInfo) returns(ProductListResponse); //批量获取商品信息
+//  rpc CreateProduct(CreateProductInfo) returns (ProductInfoResponse);
+//  rpc DeleteProduct(DeleteProductInfo) returns (google.protobuf.Empty);
+//  rpc UpdateProduct(CreateProductInfo) returns (google.protobuf.Empty);
+//  rpc GetProductDetail(ProductInfoRequest) returns(ProductInfoResponse);
 
 }
 

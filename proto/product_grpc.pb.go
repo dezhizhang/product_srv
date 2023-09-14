@@ -11,7 +11,6 @@ import (
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
-	emptypb "google.golang.org/protobuf/types/known/emptypb"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -25,12 +24,6 @@ const _ = grpc.SupportPackageIsVersion7
 type ProductClient interface {
 	// 商品接口
 	ProductList(ctx context.Context, in *ProductFilterRequest, opts ...grpc.CallOption) (*ProductListResponse, error)
-	// 现在用户提交订单有多个商品，你得批量查询商品的信息吧
-	BatchGetProduct(ctx context.Context, in *BatchProductIdInfo, opts ...grpc.CallOption) (*ProductListResponse, error)
-	CreateProduct(ctx context.Context, in *CreateProductInfo, opts ...grpc.CallOption) (*ProductInfoResponse, error)
-	DeleteProduct(ctx context.Context, in *DeleteProductInfo, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	UpdateProduct(ctx context.Context, in *CreateProductInfo, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	GetProductDetail(ctx context.Context, in *ProductInfoRequest, opts ...grpc.CallOption) (*ProductInfoResponse, error)
 }
 
 type productClient struct {
@@ -50,63 +43,12 @@ func (c *productClient) ProductList(ctx context.Context, in *ProductFilterReques
 	return out, nil
 }
 
-func (c *productClient) BatchGetProduct(ctx context.Context, in *BatchProductIdInfo, opts ...grpc.CallOption) (*ProductListResponse, error) {
-	out := new(ProductListResponse)
-	err := c.cc.Invoke(ctx, "/Product/BatchGetProduct", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *productClient) CreateProduct(ctx context.Context, in *CreateProductInfo, opts ...grpc.CallOption) (*ProductInfoResponse, error) {
-	out := new(ProductInfoResponse)
-	err := c.cc.Invoke(ctx, "/Product/CreateProduct", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *productClient) DeleteProduct(ctx context.Context, in *DeleteProductInfo, opts ...grpc.CallOption) (*emptypb.Empty, error) {
-	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, "/Product/DeleteProduct", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *productClient) UpdateProduct(ctx context.Context, in *CreateProductInfo, opts ...grpc.CallOption) (*emptypb.Empty, error) {
-	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, "/Product/UpdateProduct", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *productClient) GetProductDetail(ctx context.Context, in *ProductInfoRequest, opts ...grpc.CallOption) (*ProductInfoResponse, error) {
-	out := new(ProductInfoResponse)
-	err := c.cc.Invoke(ctx, "/Product/GetProductDetail", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // ProductServer is the server API for Product service.
 // All implementations must embed UnimplementedProductServer
 // for forward compatibility
 type ProductServer interface {
 	// 商品接口
 	ProductList(context.Context, *ProductFilterRequest) (*ProductListResponse, error)
-	// 现在用户提交订单有多个商品，你得批量查询商品的信息吧
-	BatchGetProduct(context.Context, *BatchProductIdInfo) (*ProductListResponse, error)
-	CreateProduct(context.Context, *CreateProductInfo) (*ProductInfoResponse, error)
-	DeleteProduct(context.Context, *DeleteProductInfo) (*emptypb.Empty, error)
-	UpdateProduct(context.Context, *CreateProductInfo) (*emptypb.Empty, error)
-	GetProductDetail(context.Context, *ProductInfoRequest) (*ProductInfoResponse, error)
 	mustEmbedUnimplementedProductServer()
 }
 
@@ -116,21 +58,6 @@ type UnimplementedProductServer struct {
 
 func (UnimplementedProductServer) ProductList(context.Context, *ProductFilterRequest) (*ProductListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ProductList not implemented")
-}
-func (UnimplementedProductServer) BatchGetProduct(context.Context, *BatchProductIdInfo) (*ProductListResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method BatchGetProduct not implemented")
-}
-func (UnimplementedProductServer) CreateProduct(context.Context, *CreateProductInfo) (*ProductInfoResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateProduct not implemented")
-}
-func (UnimplementedProductServer) DeleteProduct(context.Context, *DeleteProductInfo) (*emptypb.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteProduct not implemented")
-}
-func (UnimplementedProductServer) UpdateProduct(context.Context, *CreateProductInfo) (*emptypb.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateProduct not implemented")
-}
-func (UnimplementedProductServer) GetProductDetail(context.Context, *ProductInfoRequest) (*ProductInfoResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetProductDetail not implemented")
 }
 func (UnimplementedProductServer) mustEmbedUnimplementedProductServer() {}
 
@@ -163,96 +90,6 @@ func _Product_ProductList_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Product_BatchGetProduct_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(BatchProductIdInfo)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ProductServer).BatchGetProduct(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/Product/BatchGetProduct",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProductServer).BatchGetProduct(ctx, req.(*BatchProductIdInfo))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Product_CreateProduct_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateProductInfo)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ProductServer).CreateProduct(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/Product/CreateProduct",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProductServer).CreateProduct(ctx, req.(*CreateProductInfo))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Product_DeleteProduct_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DeleteProductInfo)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ProductServer).DeleteProduct(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/Product/DeleteProduct",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProductServer).DeleteProduct(ctx, req.(*DeleteProductInfo))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Product_UpdateProduct_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateProductInfo)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ProductServer).UpdateProduct(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/Product/UpdateProduct",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProductServer).UpdateProduct(ctx, req.(*CreateProductInfo))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Product_GetProductDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ProductInfoRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ProductServer).GetProductDetail(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/Product/GetProductDetail",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProductServer).GetProductDetail(ctx, req.(*ProductInfoRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 // Product_ServiceDesc is the grpc.ServiceDesc for Product service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -263,26 +100,6 @@ var Product_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ProductList",
 			Handler:    _Product_ProductList_Handler,
-		},
-		{
-			MethodName: "BatchGetProduct",
-			Handler:    _Product_BatchGetProduct_Handler,
-		},
-		{
-			MethodName: "CreateProduct",
-			Handler:    _Product_CreateProduct_Handler,
-		},
-		{
-			MethodName: "DeleteProduct",
-			Handler:    _Product_DeleteProduct_Handler,
-		},
-		{
-			MethodName: "UpdateProduct",
-			Handler:    _Product_UpdateProduct_Handler,
-		},
-		{
-			MethodName: "GetProductDetail",
-			Handler:    _Product_GetProductDetail_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

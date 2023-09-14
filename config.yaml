@@ -1,0 +1,7 @@
+host: "127.0.0.1"
+port: 8848
+namespace: "b75e44ea-4ddb-49e7-8ed3-4d8ab0ac77db"
+user: "nacos"
+password: "nacos"
+dataid: "sales-product-srv"
+group: "dev"
