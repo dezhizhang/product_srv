@@ -15,7 +15,7 @@ type ConsulConfig struct {
 
 type NacosConfig struct {
 	Host      string `mapstructure:"host" json:"host"`
-	Port      int    `mapstructure:"port" json:"port"`
+	Port      uint64 `mapstructure:"port" json:"port"`
 	Namespace string `mapstructure:"namespace" json:"namespace"`
 	User      string `mapstructure:"user" json:"user"`
 	Password  string `mapstructure:"password" json:"password"`
@@ -26,6 +26,8 @@ type NacosConfig struct {
 type ServerConfig struct {
 	Name         string       `mapstructure:"name" json:"name"`
 	Tags         []string     `mapstructure:"tags" json:"tags"`
+	Host         string       `mapstructure:"host" json:"host"`
+	Port         int          `mapstructure:"port" json:"port"`
 	MysqlConfig  MysqlConfig  `mapstructure:"mysql" json:"mysql"`
 	ConsulConfig ConsulConfig `mapstructure:"consul" json:"consul"`
 }

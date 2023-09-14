@@ -6,7 +6,7 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 	"log"
-	"sales-product-srv/driver"
+	"sales-product-srv/global"
 	"sales-product-srv/model"
 	"sales-product-srv/proto"
 	"sales-product-srv/utils"
@@ -14,6 +14,7 @@ import (
 )
 
 type BannerServer struct {
+	proto.UnimplementedBrandServer
 }
 
 // 获取轮播图
@@ -33,7 +34,7 @@ func (b *BannerServer) CreateBanner(ctx context.Context, req *proto.CreateBanner
 	banner.Index = req.Index
 	banner.CreatedAt = time.Now()
 	banner.DeletedAt = time.Now()
-	err = driver.DB.Save(&banner).Error
+	err = global.DB.Save(&banner).Error
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, err.Error())
 	}
@@ -46,7 +47,7 @@ func (b *BannerServer) GetBannerList(ctx context.Context, req *proto.BannerReque
 	var count int64
 	var banners []model.Banner
 	var bannerList []*proto.BannerResponse
-	result := driver.DB.Find(&banners)
+	result := global.DB.Find(&banners)
 	if result.Error != nil {
 		return nil, status.Errorf(codes.Internal, "查询失败")
 	}
@@ -54,9 +55,9 @@ func (b *BannerServer) GetBannerList(ctx context.Context, req *proto.BannerReque
 	rsp := &proto.BannerResponseList{}
 
 	// 分页
-	driver.DB.Scopes(utils.Paginate(int(req.PageIndex), int(req.PageSize))).Find(&banners)
+	global.DB.Scopes(utils.Paginate(int(req.PageIndex), int(req.PageSize))).Find(&banners)
 	//查询所有总数
-	driver.DB.Model(&model.Brands{}).Count(&count)
+	global.DB.Model(&model.Brands{}).Count(&count)
 	for _, value := range banners {
 		bannerList = append(bannerList, &proto.BannerResponse{
 			Id:    value.Id,
@@ -75,10 +76,10 @@ func (b *BannerServer) GetBannerList(ctx context.Context, req *proto.BannerReque
 
 func (b *BannerServer) DeleteBanner(ctx context.Context, req *proto.DeleteBannerRequest) (*empty.Empty, error) {
 	var banner model.Banner
-	if result := driver.DB.Where("id=?", req.Id).Find(&banner); result.RowsAffected == 0 {
+	if result := global.DB.Where("id=?", req.Id).Find(&banner); result.RowsAffected == 0 {
 		return nil, status.Errorf(codes.NotFound, "轮播图不存在")
 	}
-	if result := driver.DB.Where("id=?", req.Id).Delete(&banner); result.RowsAffected != 1 {
+	if result := global.DB.Where("id=?", req.Id).Delete(&banner); result.RowsAffected != 1 {
 		return nil, status.Errorf(codes.Internal, "删除失败")
 	}
 	return &empty.Empty{}, nil
@@ -88,7 +89,7 @@ func (b *BannerServer) DeleteBanner(ctx context.Context, req *proto.DeleteBanner
 
 func (b *BannerServer) UpdateBanner(ctx context.Context, req *proto.UpdateBannerRequest) (*empty.Empty, error) {
 	var banner model.Banner
-	result := driver.DB.Where("id = ?", req.Id).Find(&banner)
+	result := global.DB.Where("id = ?", req.Id).Find(&banner)
 	if result.RowsAffected == 0 {
 		return nil, status.Errorf(codes.Internal, "更新的轮播图不存在")
 	}
@@ -98,7 +99,7 @@ func (b *BannerServer) UpdateBanner(ctx context.Context, req *proto.UpdateBanner
 	banner.Index = req.Index
 	banner.UpdatedAt = time.Now()
 
-	err := driver.DB.Save(&banner).Error
+	err := global.DB.Save(&banner).Error
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "更新轮播图失败")
 	}

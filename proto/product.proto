@@ -1,117 +1,117 @@
-syntax = "proto3";
-import "google/protobuf/empty.proto";
-option go_package = "./;proto";
-
-service Product{
-  //商品接口
-  rpc ProductList(ProductFilterRequest) returns(ProductListResponse);
-  //现在用户提交订单有多个商品，你得批量查询商品的信息吧
-//  rpc BatchGetProduct(BatchProductIdInfo) returns(ProductListResponse); //批量获取商品信息
-//  rpc CreateProduct(CreateProductInfo) returns (ProductInfoResponse);
-//  rpc DeleteProduct(DeleteProductInfo) returns (google.protobuf.Empty);
-//  rpc UpdateProduct(CreateProductInfo) returns (google.protobuf.Empty);
-//  rpc GetProductDetail(ProductInfoRequest) returns(ProductInfoResponse);
-
-}
-
-message CreateProductInfo {
-  int32 id = 1;
-  string name = 2;
-  string productSn = 3;
-  int32 stocks = 7; //库存，
-  float marketPrice = 8;
-  float shopPrice = 9;
-  string productBrief = 10;
-  string productDesc = 11;
-  bool shipFree = 12;
-  repeated string images = 13;
-  repeated string descImages = 14;
-  string productImage = 15;
-  bool isNew = 16;
-  bool isHot = 17;
-  bool onSale = 18;
-  int32 categoryId = 19;
-  int32 brandId = 20;
-}
-
-
-message BatchProductIdInfo {
-  repeated int32 id = 1;
-}
-
-message DeleteProductInfo {
-  int32 id = 1;
-}
-
-message CategoryBriefInfoResponse {
-  int32 id = 1;
-  string name = 2;
-}
-
-message ProductInfoResponse {
-  int32 id = 1;
-  int32 categoryId = 2;
-  string name = 3;
-  string productSn = 4;
-  int32 clickNum = 5;
-  int32 soldNum = 6;
-  int32 favNum = 7;
-  float marketPrice = 9;
-  float shopPrice = 10;
-  string productBrief = 11;
-  string productDesc = 12;
-  bool shipFree = 13;
-  repeated string images = 14;
-  repeated string descImages = 15;
-  string productImage = 16;
-  bool isNew = 17;
-  bool isHot = 18;
-  bool onSale = 19;
-  int64 addTime = 20;
-  CategoryBriefInfoResponse category = 21;
-  BrandInfoResponse brand = 22;
-}
-
-message ProductInfoRequest {
-  int32 id = 1;
-}
-
-message BrandInfoResponse {
-  int32 id = 1;
-  string name = 2;
-  string logo = 3;
-}
-
-message CategoryInfoResponse {
-  int32 id = 1;
-  string name = 2;
-  int32 parentCategory = 3;
-  int32 level = 4;
-  bool isTab = 5;
-}
-
-message CategoryBrandResponse{
-  int32 id = 1;
-  BrandInfoResponse brand = 2;
-  CategoryInfoResponse category = 3;
-}
-
-message ProductListResponse {
-  int32 total = 1;
-  repeated ProductInfoResponse data = 2;
-}
-
-message ProductFilterRequest  {
-  int32 priceMin = 1;
-  int32 priceMax = 2;
-  bool  isHot = 3;
-  bool  isNew = 4;
-  bool  isTab = 5;
-  int32 topCategory = 6;
-  int32 pages = 7;
-  int32 pagePerNums = 8;
-  string keyWords = 9;
-  int32 brand = 10;
-}
-
-
+//syntax = "proto3";
+//import "google/protobuf/empty.proto";
+//option go_package = "./;proto";
+//
+//service Product{
+//  //商品接口
+//  rpc ProductList(ProductFilterRequest) returns(ProductListResponse);
+//  //现在用户提交订单有多个商品，你得批量查询商品的信息吧
+////  rpc BatchGetProduct(BatchProductIdInfo) returns(ProductListResponse); //批量获取商品信息
+////  rpc CreateProduct(CreateProductInfo) returns (ProductInfoResponse);
+////  rpc DeleteProduct(DeleteProductInfo) returns (google.protobuf.Empty);
+////  rpc UpdateProduct(CreateProductInfo) returns (google.protobuf.Empty);
+////  rpc GetProductDetail(ProductInfoRequest) returns(ProductInfoResponse);
+//
+//}
+//
+//message CreateProductInfo {
+//  int32 id = 1;
+//  string name = 2;
+//  string productSn = 3;
+//  int32 stocks = 7; //库存，
+//  float marketPrice = 8;
+//  float shopPrice = 9;
+//  string productBrief = 10;
+//  string productDesc = 11;
+//  bool shipFree = 12;
+//  repeated string images = 13;
+//  repeated string descImages = 14;
+//  string productImage = 15;
+//  bool isNew = 16;
+//  bool isHot = 17;
+//  bool onSale = 18;
+//  int32 categoryId = 19;
+//  int32 brandId = 20;
+//}
+//
+//
+//message BatchProductIdInfo {
+//  repeated int32 id = 1;
+//}
+//
+//message DeleteProductInfo {
+//  int32 id = 1;
+//}
+//
+//message CategoryBriefInfoResponse {
+//  int32 id = 1;
+//  string name = 2;
+//}
+//
+//message ProductInfoResponse {
+//  int32 id = 1;
+//  int32 categoryId = 2;
+//  string name = 3;
+//  string productSn = 4;
+//  int32 clickNum = 5;
+//  int32 soldNum = 6;
+//  int32 favNum = 7;
+//  float marketPrice = 9;
+//  float shopPrice = 10;
+//  string productBrief = 11;
+//  string productDesc = 12;
+//  bool shipFree = 13;
+//  repeated string images = 14;
+//  repeated string descImages = 15;
+//  string productImage = 16;
+//  bool isNew = 17;
+//  bool isHot = 18;
+//  bool onSale = 19;
+//  int64 addTime = 20;
+//  CategoryBriefInfoResponse category = 21;
+//  BrandInfoResponse brand = 22;
+//}
+//
+//message ProductInfoRequest {
+//  int32 id = 1;
+//}
+//
+//message BrandInfoResponse {
+//  int32 id = 1;
+//  string name = 2;
+//  string logo = 3;
+//}
+//
+//message CategoryInfoResponse {
+//  int32 id = 1;
+//  string name = 2;
+//  int32 parentCategory = 3;
+//  int32 level = 4;
+//  bool isTab = 5;
+//}
+//
+//message CategoryBrandResponse{
+//  int32 id = 1;
+//  BrandInfoResponse brand = 2;
+//  CategoryInfoResponse category = 3;
+//}
+//
+//message ProductListResponse {
+//  int32 total = 1;
+//  repeated ProductInfoResponse data = 2;
+//}
+//
+//message ProductFilterRequest  {
+//  int32 priceMin = 1;
+//  int32 priceMax = 2;
+//  bool  isHot = 3;
+//  bool  isNew = 4;
+//  bool  isTab = 5;
+//  int32 topCategory = 6;
+//  int32 pages = 7;
+//  int32 pagePerNums = 8;
+//  string keyWords = 9;
+//  int32 brand = 10;
+//}
+//
+//
