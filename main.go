@@ -27,7 +27,8 @@ func main() {
 	initialize.InitDB()
 
 	server := grpc.NewServer()
-	proto.RegisterBrandServer(server, &handler.BannerServer{})
+	proto.RegisterBrandServer(server, &handler.BrandServer{})
+	proto.RegisterBannerServer(server, &handler.BannerServer{})
 	//proto.RegisterUserServer(server, &handler.UserServer{})
 	listen, err := net.Listen("tcp", fmt.Sprintf("%s:%d",
 		global.ServerConfig.Host, global.ServerConfig.Port,

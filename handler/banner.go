@@ -14,7 +14,7 @@ import (
 )
 
 type BannerServer struct {
-	proto.UnimplementedBrandServer
+	proto.UnimplementedBannerServer
 }
 
 // 获取轮播图
