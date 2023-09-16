@@ -30,9 +30,8 @@ message DeleteBannerRequest {
 }
 
 message BannerRequest  {
-  string id = 1;
-  int32  pageIndex = 2;
-  int32  pageSize = 3;
+  int32  pageIndex = 1;
+  int32  pageSize = 2;
 }
 
 message BannerResponse{
