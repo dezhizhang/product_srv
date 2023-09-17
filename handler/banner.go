@@ -5,7 +5,6 @@ import (
 	"github.com/golang/protobuf/ptypes/empty"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
-	"log"
 	"sales-product-srv/global"
 	"sales-product-srv/model"
 	"sales-product-srv/proto"
@@ -17,24 +16,25 @@ type BannerServer struct {
 	proto.UnimplementedBannerServer
 }
 
-// 获取轮播图
-
+// CreateBanner 创建轮播图
 func (b *BannerServer) CreateBanner(ctx context.Context, req *proto.CreateBannerRequest) (*empty.Empty, error) {
-	var banner model.Banner
-	var err error
 
-	id, err1 := utils.SnowflakeId()
-	if err1 != nil {
-		log.Printf("创建轮播图%s", err.Error())
-		return nil, err
+	banner := model.Banner{
+		Name:        req.Name,
+		Link:        req.Link,
+		Url:         req.Url,
+		Status:      req.Status,
+		Position:    req.Position,
+		Description: req.Description,
 	}
-	banner.Id = id
-	banner.Image = req.Image
-	banner.Url = req.Url
-	banner.Index = req.Index
+	bannerId, _ := utils.SnowflakeId()
+
+	banner.Id = bannerId
 	banner.CreatedAt = time.Now()
+	banner.UpdatedAt = time.Now()
 	banner.DeletedAt = time.Now()
-	err = global.DB.Save(&banner).Error
+
+	err := global.DB.Save(&banner).Error
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, err.Error())
 	}
@@ -60,10 +60,13 @@ func (b *BannerServer) GetBannerList(ctx context.Context, req *proto.BannerReque
 	global.DB.Model(&model.Brands{}).Count(&count)
 	for _, value := range banners {
 		bannerList = append(bannerList, &proto.BannerResponse{
-			Id:    value.Id,
-			Image: value.Image,
-			Index: value.Index,
-			Url:   value.Url,
+			Id:          value.Id,
+			Name:        value.Name,
+			Link:        value.Link,
+			Url:         value.Url,
+			Status:      value.Status,
+			Position:    value.Position,
+			Description: value.Description,
 		})
 	}
 	rsp.Total = int32(count)
@@ -95,8 +98,8 @@ func (b *BannerServer) UpdateBanner(ctx context.Context, req *proto.UpdateBanner
 	}
 	banner.Id = req.Id
 	banner.Url = req.Url
-	banner.Image = req.Image
-	banner.Index = req.Index
+	//banner.Image = req.Image
+	//banner.Index = req.Index
 	banner.UpdatedAt = time.Now()
 
 	err := global.DB.Save(&banner).Error
