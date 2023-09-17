@@ -23,9 +23,12 @@ message CreateBannerRequest {
 
 message UpdateBannerRequest{
   string id = 1;
-  string image = 2;
-  string url = 3;
-  int32 index = 4;
+  string name = 2;
+  string status = 3;
+  string position = 4;
+  string link = 5;
+  string url = 6;
+  string description = 7;
 }
 //
 message DeleteBannerRequest {
