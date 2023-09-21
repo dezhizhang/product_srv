@@ -13,6 +13,11 @@ type ConsulConfig struct {
 	Port int    `mapstructure:"port" json:"port"`
 }
 
+type ElasticConfig struct {
+	Host string `mapstructure:"host" json:"host"`
+	Port int    `mapstructure:"port" json:"port"`
+}
+
 type NacosConfig struct {
 	Host      string `mapstructure:"host" json:"host"`
 	Port      uint64 `mapstructure:"port" json:"port"`
@@ -24,10 +29,11 @@ type NacosConfig struct {
 }
 
 type ServerConfig struct {
-	Name         string       `mapstructure:"name" json:"name"`
-	Tags         []string     `mapstructure:"tags" json:"tags"`
-	Host         string       `mapstructure:"host" json:"host"`
-	Port         int          `mapstructure:"port" json:"port"`
-	MysqlConfig  MysqlConfig  `mapstructure:"mysql" json:"mysql"`
-	ConsulConfig ConsulConfig `mapstructure:"consul" json:"consul"`
+	Name          string        `mapstructure:"name" json:"name"`
+	Tags          []string      `mapstructure:"tags" json:"tags"`
+	Host          string        `mapstructure:"host" json:"host"`
+	Port          int           `mapstructure:"port" json:"port"`
+	MysqlConfig   MysqlConfig   `mapstructure:"mysql" json:"mysql"`
+	ConsulConfig  ConsulConfig  `mapstructure:"consul" json:"consul"`
+	ElasticConfig ElasticConfig `mapstructure:"elastic" json:"elastic"`
 }

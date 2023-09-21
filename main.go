@@ -26,6 +26,8 @@ func main() {
 	// 初始化数据库
 	initialize.InitDB()
 
+	initialize.InitElastic()
+
 	server := grpc.NewServer()
 	proto.RegisterBrandServer(server, &handler.BrandServer{})
 	proto.RegisterBannerServer(server, &handler.BannerServer{})
